@@ -1,6 +1,6 @@
 use std::net::Ipv6Addr;
 
-pub fn ipv4_from_str(ipv4: &str) -> Result<u32, &'static str> {
+pub fn ipv4_from_str(ipv4: &str) -> Result<u32, &str> {
     let mut number: u32 = 0;
     let mut desplazamiento = 0;
     for part in ipv4.split('.').rev() {
@@ -19,10 +19,7 @@ pub fn ipv4_from_str(ipv4: &str) -> Result<u32, &'static str> {
 
 /// Check whether an ASCII character represents an hexadecimal digit
 fn is_hex_digit(byte: u8) -> bool {
-    match byte {
-        b'0'..=b'9' | b'a'..=b'f' | b'A'..=b'F' => true,
-        _ => false,
-    }
+    matches!(byte, b'0'..=b'9' | b'a'..=b'f' | b'A'..=b'F')
 }
 /// Convert an ASCII character that represents an hexadecimal digit into this digit
 fn hex_to_digit(byte: u8) -> u8 {
@@ -33,7 +30,7 @@ fn hex_to_digit(byte: u8) -> u8 {
         _ => unreachable!(),
     }
 }
-pub fn ipv4_to_u32_bytes(ipv4: &[u8]) -> Result<u32, &'static str> {
+pub fn ipv4_to_u32_bytes(ipv4: &[u8]) -> Result<u32, &str> {
     if ipv4.len() != 4 {
         return Err("Invalid IPV4 length");
     }
@@ -80,7 +77,7 @@ fn read_hextet(bytes: &[u8]) -> (usize, u16) {
     (count, res)
 }
 
-pub fn ipv6_from_str(s: &str) -> Result<u128, &'static str> {
+pub fn ipv6_from_str(s: &str) -> Result<u128, &str> {
     // We'll manipulate bytes instead of UTF-8 characters, because the characters that
     // represent an IPv6 address are supposed to be ASCII characters.
     let bytes = s.as_bytes();
@@ -280,7 +277,7 @@ pub fn is_local_ipv4(ip: u32) -> bool {
     return false;
 }
 
-pub fn port_to_u16(port: &str) -> Result<u16, &'static str> {
+pub fn port_to_u16(port: &str) -> Result<u16, &str> {
     return match port.parse::<u16>() {
         Ok(port) => Ok(port),
         Err(_) => Err("Cannot parse port as u16"),

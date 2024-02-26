@@ -3,9 +3,8 @@ use crate::prelude::types::LogString;
 
 use serde::Serialize;
 use std::collections::BTreeMap;
-use std::sync::Arc;
-use std::time::Duration;
 
+#[allow(dead_code)]
 #[derive(Serialize, Debug)]
 pub enum UpdateRules {
     Add(SiemRule),

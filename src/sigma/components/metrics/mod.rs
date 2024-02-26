@@ -6,15 +6,15 @@ use std::sync::atomic::AtomicI64;
 use std::sync::atomic::AtomicU64;
 use std::sync::Arc;
 
-pub static CONNECTED_AGENTS: &'static str = "connected_agents";
-pub static PROCESSING_LOGS_INPUT: &'static str = "processing_logs_input";
-pub static PROCESSING_LOGS_PARSER: &'static str = "processing_logs_parser";
-pub static LOGS_PARSING_TIME: &'static str = "logs_parsing_time";
-pub static PROCESSING_LOGS_ENCHANCER: &'static str = "processing_logs_enchancer";
-pub static PROCESSING_LOGS_INDEXER: &'static str = "processing_logs_indexer";
-pub static LOGS_INDEXING_TIME: &'static str = "logs_indexing_time";
-pub static PROCESSED_BYTES_INPUT: &'static str = "processed_bytes_input";
-pub static PROCESSED_BYTES_INDEXER: &'static str = "processed_bytes_indexer";
+pub static CONNECTED_AGENTS: &str = "connected_agents";
+pub static PROCESSING_LOGS_INPUT: &str = "processing_logs_input";
+pub static PROCESSING_LOGS_PARSER: &str = "processing_logs_parser";
+pub static LOGS_PARSING_TIME: &str = "logs_parsing_time";
+pub static PROCESSING_LOGS_ENCHANCER: &str = "processing_logs_enchancer";
+pub static PROCESSING_LOGS_INDEXER: &str = "processing_logs_indexer";
+pub static LOGS_INDEXING_TIME: &str = "logs_indexing_time";
+pub static PROCESSED_BYTES_INPUT: &str = "processed_bytes_input";
+pub static PROCESSED_BYTES_INDEXER: &str = "processed_bytes_indexer";
 
 pub const BASIC_LE_CALCULATOR: [f64; 10] =
     [0.001, 0.005, 0.01, 0.05, 0.1, 0.5, 1.0, 2.0, 5.0, 10.0];

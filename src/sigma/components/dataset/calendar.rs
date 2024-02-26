@@ -1,6 +1,5 @@
 use std::{collections::BTreeMap, sync::Arc};
 
-
 use serde::Serialize;
 
 use crate::prelude::types::LogString;
@@ -15,7 +14,7 @@ pub enum UpdateCalendar {
 
 #[derive(Debug, Clone)]
 pub struct CalendarSynDataset {
-    dataset: Arc<CalendarDataset>
+    dataset: Arc<CalendarDataset>,
 }
 
 #[derive(Serialize, Debug)]

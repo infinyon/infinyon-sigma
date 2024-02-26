@@ -145,9 +145,9 @@ impl SiemIp {
         }
     }
     pub fn from_ip_str(val: &str) -> Result<SiemIp, LogString> {
-        match ipv4_from_str(&val) {
+        match ipv4_from_str(val) {
             Ok(val) => Ok(SiemIp::V4(val)),
-            Err(_) => match ipv6_from_str(&val) {
+            Err(_) => match ipv6_from_str(val) {
                 Ok(val) => Ok(SiemIp::V6(val)),
                 Err(_) => Err(LogString::Borrowed("Invalid IP value")),
             },

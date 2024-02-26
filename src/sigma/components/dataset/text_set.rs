@@ -14,7 +14,6 @@ pub struct TextSetSynDataset {
     dataset: Arc<TextSetDataset>,
 }
 
-
 #[derive(Serialize, Debug)]
 pub struct TextSetDataset {
     data: BTreeSet<LogString>,

@@ -1,3 +1,5 @@
+use anyhow::Result;
+
 use crate::prelude::{AlertAggregation, AlertSeverity, SiemField, SiemIp};
 
 use super::dataset::SiemDatasetType;
@@ -5,6 +7,7 @@ use super::mitre::{MitreTactics, MitreTechniques};
 use crate::prelude::types::LogString;
 use regex::Regex;
 use serde::{de, Deserialize, Serialize, Serializer};
+use serde_json::Value;
 use std::borrow::Cow;
 use std::collections::BTreeMap;
 use std::str::FromStr;
@@ -57,6 +60,16 @@ pub struct RuleCondition {
     pub field: LogString,
     #[serde(flatten)]
     pub operator: RuleOperator,
+}
+
+impl RuleCondition {
+    pub fn eval(&self, json: &Value) -> Result<bool> {
+        if let Some(field_val) = json.get(&self.field.as_ref()) {
+            self.operator.eval(field_val)
+        } else {
+            Ok(false)
+        }
+    }
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
@@ -125,6 +138,67 @@ impl PartialEq for RuleOperator {
             (Self::InCountry(v1), Self::InCountry(v2)) => v1 == v2,
             (Self::IsNull(v1), Self::IsNull(v2)) => v1 == v2,
             _ => false,
+        }
+    }
+}
+
+impl RuleOperator {
+    pub fn eval(&self, field_val: &Value) -> Result<bool> {
+        match self {
+            RuleOperator::All(operators) => {
+                for op in operators {
+                    if !op.eval(field_val)? {
+                        return Ok(false);
+                    }
+                }
+                Ok(true)
+            }
+            RuleOperator::Any(operators) => {
+                for op in operators {
+                    if op.eval(field_val)? {
+                        return Ok(true);
+                    }
+                }
+                Ok(false)
+            }
+            RuleOperator::Equals(field) => {
+                if let Some(field_str_val) = field_val.as_str() {
+                    Ok(field.to_string() == field_str_val)
+                } else {
+                    Ok(false)
+                }
+            }
+            RuleOperator::Not(op) => Ok(!op.eval(field_val)?),
+            RuleOperator::StartsWith(arg) => {
+                if let Some(s) = field_val.as_str() {
+                    Ok(s.starts_with(arg))
+                } else {
+                    Ok(false)
+                }
+            }
+            RuleOperator::EndsWith(arg) => {
+                if let Some(s) = field_val.as_str() {
+                    Ok(s.ends_with(arg))
+                } else {
+                    Ok(false)
+                }
+            }
+            RuleOperator::Contains(arg) => {
+                if let Some(s) = field_val.as_str() {
+                    Ok(s.contains(arg))
+                } else {
+                    Ok(false)
+                }
+            }
+
+            RuleOperator::Matches(regex) => {
+                if let Some(s) = field_val.as_str() {
+                    Ok(regex.is_match(s))
+                } else {
+                    Ok(false)
+                }
+            }
+            _ => Err(anyhow::anyhow!("Not implemented: {:?}", self)),
         }
     }
 }

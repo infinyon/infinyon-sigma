@@ -55,7 +55,7 @@ fn transform_escape_char(ch: char) -> Result<char, ()> {
 impl QueryLexer {
     pub fn new(input: Vec<char>) -> Self {
         Self {
-            input: input,
+            input,
             position: 0,
             read_position: 0,
             ch: '0',
@@ -228,12 +228,10 @@ impl QueryLexer {
                             tok = Token::StartsWith(data.iter().filter(|c| *c != &'*').collect())
                         } else if ends_astx {
                             tok = Token::EndsWith(data.iter().filter(|c| *c != &'*').collect())
+                        } else if n_asterix == 0 {
+                            tok = Token::String(data.iter().collect())
                         } else {
-                            if n_asterix == 0 {
-                                tok = Token::String(data.iter().collect())
-                            } else {
-                                tok = Token::Like(data.iter().collect())
-                            }
+                            tok = Token::Like(data.iter().collect())
                         }
                     }
                 } else {

@@ -13,9 +13,8 @@ pub enum UpdateIpSet {
 
 #[derive(Debug, Clone)]
 pub struct IpSetSynDataset {
-    dataset: Arc<IpSetDataset>
+    dataset: Arc<IpSetDataset>,
 }
-
 
 #[derive(Serialize, Debug)]
 pub struct IpSetDataset {

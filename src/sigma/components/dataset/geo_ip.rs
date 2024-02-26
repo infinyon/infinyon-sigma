@@ -1,12 +1,9 @@
+use serde::Serialize;
 use std::collections::BTreeMap;
 use std::sync::Arc;
-use serde::Serialize;
 
 use super::super::super::events::field::SiemIp;
 use crate::prelude::types::LogString;
-
-
-
 
 /// Enum used to Add/Remove an IP in the GeoIP dataset or full replace it
 #[derive(Serialize, Debug)]
@@ -18,7 +15,7 @@ pub enum UpdateGeoIp {
 
 #[derive(Debug, Clone)]
 pub struct GeoIpSynDataset {
-    dataset: Arc<GeoIpDataset>
+    dataset: Arc<GeoIpDataset>,
 }
 
 #[derive(Serialize, Debug, Default)]

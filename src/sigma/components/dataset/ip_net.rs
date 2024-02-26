@@ -13,7 +13,7 @@ pub enum UpdateNetIp {
 
 #[derive(Debug, Clone)]
 pub struct IpNetSynDataset {
-    dataset: Arc<IpNetDataset>
+    dataset: Arc<IpNetDataset>,
 }
 
 #[derive(Serialize, Debug)]

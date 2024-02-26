@@ -4,7 +4,6 @@ use crate::prelude::types::LogString;
 use serde::Serialize;
 use std::{collections::BTreeMap, sync::Arc};
 
-
 #[derive(Serialize, Debug)]
 pub enum UpdateIpMap {
     Add((SiemIp, LogString)),
@@ -16,7 +15,6 @@ pub enum UpdateIpMap {
 pub struct IpMapSynDataset {
     dataset: Arc<IpMapDataset>,
 }
-
 
 #[derive(Serialize, Debug)]
 pub struct IpMapDataset {

@@ -4,7 +4,7 @@ use std::{
     sync::atomic::{AtomicUsize, Ordering},
 };
 
-use crate::prelude::{NotificationLevel};
+use crate::prelude::NotificationLevel;
 
 #[macro_use]
 pub mod macros;
@@ -25,4 +25,3 @@ pub fn enabled_level(level: &NotificationLevel) -> bool {
 pub fn max_level() -> NotificationLevel {
     unsafe { std::mem::transmute(MAX_NOTIFY_LEVEL_FILTER.load(Ordering::Relaxed)) }
 }
-

@@ -10,10 +10,9 @@ pub enum UpdateTextMap {
     Replace(TextMapDataset),
 }
 
-
 #[derive(Debug, Clone)]
 pub struct TextMapSynDataset {
-    dataset: Arc<TextMapDataset>
+    dataset: Arc<TextMapDataset>,
 }
 #[derive(Serialize, Debug)]
 pub struct TextMapDataset {

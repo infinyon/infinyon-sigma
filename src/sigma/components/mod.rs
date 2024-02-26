@@ -32,7 +32,7 @@ pub trait SiemComponent: Send {
         return 0;
     }
     fn set_id(&mut self, id: u64);
-    fn name(&self) -> &'static str {
+    fn name(&self) -> &str {
         return &"SiemComponent";
     }
 

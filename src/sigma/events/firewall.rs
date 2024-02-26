@@ -67,13 +67,13 @@ pub enum FirewallOutcome {
 impl FirewallOutcome {
     pub fn equals(&self, val: &str) -> bool {
         match (val, self) {
-            ("BLOCK", FirewallOutcome::BLOCK) => return true,
-            ("ALLOW", FirewallOutcome::ALLOW) => return true,
-            ("END", FirewallOutcome::END) => return true,
-            ("STATS", FirewallOutcome::STATS) => return true,
-            ("OPEN", FirewallOutcome::OPEN) => return true,
-            ("UNKNOWN", FirewallOutcome::UNKNOWN) => return true,
-            _ => return false,
+            ("BLOCK", FirewallOutcome::BLOCK) => true,
+            ("ALLOW", FirewallOutcome::ALLOW) => true,
+            ("END", FirewallOutcome::END) => true,
+            ("STATS", FirewallOutcome::STATS) => true,
+            ("OPEN", FirewallOutcome::OPEN) => true,
+            ("UNKNOWN", FirewallOutcome::UNKNOWN) => true,
+            _ => false,
         }
     }
 }

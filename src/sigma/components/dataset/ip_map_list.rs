@@ -15,7 +15,7 @@ pub enum UpdateIpMapList {
 
 #[derive(Debug, Clone)]
 pub struct IpMapListSynDataset {
-    dataset: Arc<IpMapListDataset>
+    dataset: Arc<IpMapListDataset>,
 }
 
 #[derive(Serialize, Debug)]
