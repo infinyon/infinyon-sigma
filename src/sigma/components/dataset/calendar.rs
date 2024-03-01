@@ -22,11 +22,17 @@ pub struct CalendarDataset {
     data: BTreeMap<i64, Vec<(i64, i64, LogString)>>,
 }
 
+impl Default for CalendarDataset {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl CalendarDataset {
     pub fn new() -> CalendarDataset {
-        return CalendarDataset {
+        CalendarDataset {
             data: BTreeMap::new(),
-        };
+        }
     }
     pub fn insert(&mut self, start: i64, end: i64, data: LogString) {
         let start_day = start / 86400000;

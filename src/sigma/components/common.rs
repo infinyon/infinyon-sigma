@@ -68,7 +68,7 @@ impl SiemComponentCapabilities {
         tasks: Vec<TaskDefinition>,
         metrics: Vec<SiemMetricDefinition>,
     ) -> SiemComponentCapabilities {
-        return SiemComponentCapabilities {
+        SiemComponentCapabilities {
             name,
             description,
             view,
@@ -76,7 +76,7 @@ impl SiemComponentCapabilities {
             commands,
             tasks,
             metrics,
-        };
+        }
     }
     pub fn name(&self) -> &str {
         &self.name

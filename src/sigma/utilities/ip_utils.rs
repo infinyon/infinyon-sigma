@@ -14,7 +14,7 @@ pub fn ipv4_from_str(ipv4: &str) -> Result<u32, &str> {
         number += (parsed as u32) << desplazamiento;
         desplazamiento += 8;
     }
-    return Ok(number);
+    Ok(number)
 }
 
 /// Check whether an ASCII character represents an hexadecimal digit
@@ -34,10 +34,10 @@ pub fn ipv4_to_u32_bytes(ipv4: &[u8]) -> Result<u32, &str> {
     if ipv4.len() != 4 {
         return Err("Invalid IPV4 length");
     }
-    return Ok(((ipv4[0] as u32) << 24)
+    Ok(((ipv4[0] as u32) << 24)
         + ((ipv4[1] as u32) << 16)
         + ((ipv4[2] as u32) << 8)
-        + (ipv4[3] as u32));
+        + (ipv4[3] as u32))
 }
 
 /// Read up to four ASCII characters that represent hexadecimal digits, and return their value, as
@@ -241,9 +241,9 @@ pub fn ipv4_to_str(ipv4: u32) -> String {
     let mut ip = ipv4;
     for i in (0..4).rev() {
         chars[i] = ip & 0xFF;
-        ip = ip >> 8;
+        ip >>= 8;
     }
-    return format!("{}.{}.{}.{}", chars[0], chars[1], chars[2], chars[3]);
+    format!("{}.{}.{}.{}", chars[0], chars[1], chars[2], chars[3])
 }
 
 pub fn ipv6_to_str(ipv6: u128) -> String {
@@ -274,18 +274,18 @@ pub fn is_local_ipv4(ip: u32) -> bool {
     if firstnumber == 100 && secondnumber >= 64 && secondnumber <= 127 {
         return true;
     }
-    return false;
+    false
 }
 
 pub fn port_to_u16(port: &str) -> Result<u16, &str> {
-    return match port.parse::<u16>() {
+    match port.parse::<u16>() {
         Ok(port) => Ok(port),
         Err(_) => Err("Cannot parse port as u16"),
-    };
+    }
 }
 
 pub fn parse_ipv4_port(text: &str) -> Option<(u32, u16)> {
-    match text.rfind(":") {
+    match text.rfind(':') {
         Some(pos) => match (ipv4_from_str(&text[..pos]), port_to_u16(&text[(pos + 1)..])) {
             (Ok(v1), Ok(v2)) => Some((v1, v2)),
             _ => None,
@@ -295,7 +295,7 @@ pub fn parse_ipv4_port(text: &str) -> Option<(u32, u16)> {
 }
 
 pub fn is_ipv4_port(text: &str) -> bool {
-    match text.rfind(":") {
+    match text.rfind(':') {
         Some(pos) => match (ipv4_from_str(&text[..pos]), port_to_u16(&text[(pos + 1)..])) {
             (Ok(_), Ok(_)) => true,
             _ => false,
@@ -304,16 +304,11 @@ pub fn is_ipv4_port(text: &str) -> bool {
     }
 }
 pub fn is_ipv4(text: &str) -> bool {
-    match ipv4_from_str(text) {
-        Ok(_) => true,
-        Err(_) => false,
-    }
+    ipv4_from_str(text).is_ok()
 }
+
 pub fn is_ipv6(text: &str) -> bool {
-    match ipv6_from_str(text) {
-        Ok(_) => true,
-        Err(_) => false,
-    }
+    ipv6_from_str(text).is_ok()
 }
 
 #[cfg(test)]

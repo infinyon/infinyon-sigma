@@ -25,7 +25,7 @@ pub fn parse_condition(condition: &str) -> Result<Vec<SigmaDetectionCondition>> 
                 let cond_expression = match vals[0].trim().to_lowercase().as_str() {
                     "all" => All(LogString::from(regex)),
                     "not all" | "not 1" => {
-                        let vals: Vec<&str> = vals[0].trim().split(" ").collect();
+                        let vals: Vec<&str> = vals[0].trim().split(' ').collect();
                         let cond_exp = match vals[1].trim().to_lowercase().as_str() {
                             "all" => All(LogString::from(regex)),
                             "1" => Any(LogString::from(regex)),
@@ -58,7 +58,7 @@ pub fn parse_condition(condition: &str) -> Result<Vec<SigmaDetectionCondition>> 
             let cond_expression = match vals[0].trim().to_lowercase().as_str() {
                 "all" => All(LogString::from(regex)),
                 "not all" | "not 1" => {
-                    let vals: Vec<&str> = vals[0].trim().split(" ").collect();
+                    let vals: Vec<&str> = vals[0].trim().split(' ').collect();
                     let cond_exp = match vals[1].trim().to_lowercase().as_str() {
                         "all" => All(LogString::from(regex)),
                         "1" => Any(LogString::from(regex)),

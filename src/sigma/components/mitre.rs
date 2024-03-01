@@ -46,13 +46,13 @@ pub enum MitreTactics {
     /// Persistence: The adversary is trying to maintain their foothold.
     /// https://attack.mitre.org/tactics/TA0003
     TA0003,
-    /// Privilege: Escalation 	The adversary is trying to gain higher-level permissions.
+    /// Privilege: Escalation The adversary is trying to gain higher-level permissions.
     /// https://attack.mitre.org/tactics/TA0004
     TA0004,
     /// Defense: Evasion The adversary is trying to avoid being detected.
     /// https://attack.mitre.org/tactics/TA0005
     TA0005,
-    /// Credential: Access 	The adversary is trying to steal account names and passwords.
+    /// Credential: Access The adversary is trying to steal account names and passwords.
     /// https://attack.mitre.org/tactics/TA0006
     TA0006,
     /// Discovery: The adversary is trying to figure out your environment.
@@ -82,13 +82,13 @@ pub enum MitreTactics {
     /// Persistence: The adversary is trying to maintain their foothold.
     /// https://attack.mitre.org/tactics/TA0028
     TA0028,
-    /// Privilege: Escalation 	The adversary is trying to gain higher-level permissions.
+    /// Privilege: Escalation The adversary is trying to gain higher-level permissions.
     /// https://attack.mitre.org/tactics/TA0029
     TA0029,
     /// Defense: Evasion The adversary is trying to avoid being detected.
     /// https://attack.mitre.org/tactics/TA0030
     TA0030,
-    /// Credential: Access 	The adversary is trying to steal account names, passwords, or other secrets that enable access to resources.
+    /// Credential: Access The adversary is trying to steal account names, passwords, or other secrets that enable access to resources.
     /// https://attack.mitre.org/tactics/TA0031
     TA0031,
     /// Discovery: The adversary is trying to figure out your environment.
@@ -100,7 +100,7 @@ pub enum MitreTactics {
     /// Collection: The adversary is trying to gather data of interest to their goal.
     /// https://attack.mitre.org/tactics/TA0035
     TA0035,
-    /// Command: and Control 	The adversary is trying to communicate with compromised devices to control them.
+    /// Command: and Control The adversary is trying to communicate with compromised devices to control them.
     /// https://attack.mitre.org/tactics/TA0037
     TA0037,
     /// Exfiltration: The adversary is trying to steal data.

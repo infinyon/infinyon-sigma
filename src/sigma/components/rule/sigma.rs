@@ -369,7 +369,7 @@ impl Into<SiemRule> for SigmaRule {
                     })
                     .unwrap_or_default(),
             }),
-            description: description,
+            description,
             needed_datasets: vec![],
             subrules: Cow::Owned(subrules),
             conditions: Cow::Owned(conditions),
@@ -456,7 +456,7 @@ pub struct SigmaDescriptionLexer {
 impl SigmaDescriptionLexer {
     pub fn new(input: Vec<char>) -> Self {
         Self {
-            input: input,
+            input,
             position: 0,
             read_position: 0,
             ch: '\0',

@@ -8,6 +8,11 @@ pub struct RuleSelector {
     inverted_index: BTreeMap<&'static str, BTreeSet<&'static str>>,
     rule_list: BTreeSet<&'static str>,
 }
+impl Default for RuleSelector {
+    fn default() -> Self {
+        Self::new()
+    }
+}
 
 impl RuleSelector {
     pub fn new() -> Self {
@@ -18,10 +23,10 @@ impl RuleSelector {
     }
     pub fn add(&mut self, rule_name: &'static str, rule_description: &'static str) {
         let words: Vec<&'static str> = rule_description
-            .split(|c| {
-                !((c >= '0' && c <= '9')
-                    || (c >= 'a' && c <= 'z')
-                    || (c >= 'A' && c <= 'Z')
+            .split(|c: char| {
+                !(c.is_ascii_digit()
+                    || c.is_ascii_lowercase()
+                    || c.is_ascii_uppercase()
                     || c == '-'
                     || c == '_')
             })
@@ -40,10 +45,10 @@ impl RuleSelector {
 
     pub fn search(&self, possible_rule: &str) -> Option<&'static str> {
         let words: Vec<&str> = possible_rule
-            .split(|c| {
-                !((c >= '0' && c <= '9')
-                    || (c >= 'a' && c <= 'z')
-                    || (c >= 'A' && c <= 'Z')
+            .split(|c: char| {
+                !(c.is_ascii_digit()
+                    || c.is_ascii_lowercase()
+                    || c.is_ascii_uppercase()
                     || c == '-'
                     || c == '_')
             })
